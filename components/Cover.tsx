@@ -1,10 +1,11 @@
 import React from 'react';
 
 import Button from './Button';
+import Image from 'next/image';
 
 const Cover = () => {
   return (
-    <div className="relative h-[40dvh] md:h-[80vh] lg:h-[100dvh] overflow-hidden">
+    <div className="relative h-[40vh] md:h-[80vh] lg:h-[100vh] overflow-hidden">
       <div className="text-white top-1/2 md:top-1/2 -translate-y-1/2 text-center md:text-left px-5 mt-5 sm:mt-0 md:px-32 absolute z-10">
         <p className="font-mont uppercase text-sm lg:text-xl tracking-[5px] md:tracking-[10px]	">
           presented the best
@@ -22,10 +23,12 @@ const Cover = () => {
 
       <div className="absolute inset-0 bg-black opacity-70 "></div>
       <div className="flex justify-center items-center h-full">
-        <img
+        <Image
           src="/cover.jpg"
-          className="object-cover h-full w-full"
+          className="object-cover h-ful w-full"
           alt="Cover"
+          width={"1000"}
+          height={"1000"}
         />
       </div>
     </div>
