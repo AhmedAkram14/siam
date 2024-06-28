@@ -1,15 +1,36 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="bg-transparent absolute z-20 w-full">
+    <header
+      className={`fixed top-0 w-full z-20 transition-colors duration-300 ${
+        scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+      }`}
+    >
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -48,15 +69,12 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <div className="relative">
-            <button
-              type="button"
-              className="flex items-center gap-x-1 text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
-              aria-expanded="false"
-            >
-              Home
-            </button>
-          </div>
+          <Link
+            href="/"
+            className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
+          >
+            Home
+          </Link>
           <Link
             href="/menu"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
@@ -134,16 +152,12 @@ const Header = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <div className="-mx-3">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    aria-controls="disclosure-1"
-                    aria-expanded="false"
-                  >
-                    Home
-                  </button>
-                </div>
+                <Link
+                  href="/"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Home
+                </Link>
                 <Link
                   href="/menu"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"

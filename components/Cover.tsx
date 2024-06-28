@@ -1,11 +1,28 @@
-import React from 'react';
+// "use client";
+// import 'aos/dist/aos.css';
+
+// import React, { useEffect } from 'react';
+// import AOS from 'aos';
+import { PiForkKnifeFill } from 'react-icons/pi';
 
 import Button from './Button';
+import Overlay from './overlay';
 
 const Cover = () => {
+  // useEffect(() => {
+  //   AOS.init({
+  //     offset: 200,
+  //     duration: 600,
+  //     easing: "ease-in-sine",
+  //     delay: 100,
+  //   });
+  // }, []);
   return (
     <div className="relative h-[40dvh] md:h-[80vh] lg:h-[100dvh] overflow-hidden">
-      <div className="text-white top-1/2 md:top-1/2 -translate-y-1/2 text-center md:text-left px-5 mt-5 sm:mt-0 md:px-32 absolute z-10">
+      <div
+        className="text-white top-1/2 md:top-1/2 -translate-y-1/2 text-center md:text-left px-5 mt-5 sm:mt-0 md:px-32 absolute z-10"
+        data-aos="fade-right"
+      >
         <p className="font-mont uppercase text-sm lg:text-xl tracking-[5px] md:tracking-[10px]	">
           presented the best
         </p>
@@ -17,10 +34,13 @@ const Cover = () => {
           Restaurant! Enjoy the taste of your favourite Thai cuisine from the
           comfort of your own home.
         </p>
-        <Button>view food</Button>
+        <Button optionalStyle="mx-auto lg:mx-0">
+          <PiForkKnifeFill />
+          view food
+        </Button>
       </div>
 
-      <div className="absolute inset-0 bg-black opacity-70 "></div>
+      <Overlay />
       <div className="flex justify-center items-center h-full">
         <img
           src="/cover.jpg"
