@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import LocaleSwitcher from "./Locale-Switcher";
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -108,6 +110,7 @@ const Header = () => {
             Log in <span aria-hidden="true">→</span>
           </a>
         </div>
+        <LocaleSwitcher />
       </nav>
       {/* Mobile menu, show/hide based on menu open state. */}
       <div

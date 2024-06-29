@@ -1,12 +1,13 @@
 // "use client";
 // import 'aos/dist/aos.css';
 
+import { useTranslations } from "next-intl";
 // import React, { useEffect } from 'react';
 // import AOS from 'aos';
-import { PiForkKnifeFill } from 'react-icons/pi';
+import { PiForkKnifeFill } from "react-icons/pi";
 
-import Button from './Button';
-import Overlay from './overlay';
+import Button from "./Button";
+import Overlay from "./overlay";
 
 const Cover = () => {
   // useEffect(() => {
@@ -17,6 +18,7 @@ const Cover = () => {
   //     delay: 100,
   //   });
   // }, []);
+  const t = useTranslations("Index");
   return (
     <div className="relative h-[40dvh] md:h-[80vh] lg:h-[100dvh] overflow-hidden">
       <div
@@ -24,7 +26,7 @@ const Cover = () => {
         data-aos="fade-right"
       >
         <p className="font-mont uppercase text-sm lg:text-xl tracking-[5px] md:tracking-[10px]	">
-          presented the best
+          {t("presented the best")}
         </p>
         <h3 className=" font-zilla capitalize tracking-[-1px] md:tracking-[-4px] text-[30px] md:text-[60px] lg:text-[80px] font-extrabold">
           food for family<span className="text-red-500">.</span>
