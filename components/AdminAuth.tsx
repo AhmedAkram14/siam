@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image"
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { z } from "zod"
@@ -16,9 +15,6 @@ import {
 } from "@/components/ui/form"
 import signIn from "@/firebase/auth/signin"
 import { useToast } from "./ui/use-toast"
-import { useRouter } from "next/navigation";
-import { useAdminAuthContext } from "@/context/AdminAuthContext"
-
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -27,8 +23,6 @@ const formSchema = z.object({
 
 
 export default function AdminAuth() {
-    const { user } = useAdminAuthContext()
-    const router = useRouter()
     const { toast } = useToast()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -38,7 +32,6 @@ export default function AdminAuth() {
         },
     })
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
         const { result, error } = await signIn(values.email, values.password);
         if (error) {
             toast({

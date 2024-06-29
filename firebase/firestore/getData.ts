@@ -1,5 +1,6 @@
+import { categorySchemaType } from "@/schemas/category";
 import firebase_app from "../config";
-import { getFirestore, doc, getDoc, collection, getDocs, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, QueryDocumentSnapshot, DocumentData, query } from "firebase/firestore";
 
 const db = getFirestore(firebase_app)
 export async function getDocument(collection: string, id: string) {
@@ -30,4 +31,30 @@ export async function getDocuments(coll: string) {
     });
 
     return usersList;
+}
+
+
+export const getCollectionAndDocuments = async (): Promise<categorySchemaType[]> => {
+    const collectionRef = collection(db, "categories");
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()) as categorySchemaType[];
+};
+
+export const getCategory = async (categoryTitle: string): Promise<categorySchemaType | undefined> => {
+    const collectionRef = collection(db, "categories");
+    const docRef = doc(collectionRef, categoryTitle);
+
+    try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return { ...docSnap.data() } as categorySchemaType;
+        } else {
+            console.log(`No such document with id ${categoryTitle}`);
+            return undefined;
+        }
+    } catch (error) {
+        console.error("Error fetching category:", error);
+        throw error; // You might want to handle or rethrow the error as needed
+    }
 }

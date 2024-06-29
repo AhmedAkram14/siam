@@ -7,7 +7,6 @@ import {
 } from 'firebase/auth';
 import firebase_app from '@/firebase/config';
 import { FaSpinner } from "react-icons/fa";
-import signIn from '@/firebase/auth/signin';
 import { getDocument } from '@/firebase/firestore/getData';
 import { useToast } from '@/components/ui/use-toast';
 import { signOut } from '@/firebase/auth/signup';
@@ -29,38 +28,18 @@ export const AdminAuthContextProvider = ({
     const router = useRouter()
     const [user, setUser] = React.useState<User | null>(null);
     const [loading, setLoading] = React.useState(true);
-    // const adminSignIn = async (email: string, password: string) => {
-    //     const { result: user, error } = await signIn(email, password);
-    //     if (error) {
-    //         toast({
-    //             title: "Error",
-    //             description: "something went wrong you can,t login",
-    //         })
-    //     } else {
-    //         const { result, error } = await getDocument("users", user?.user.uid || "")
-    //         if (result?.data()?.isAdmin) {
-    //             toast({
-    //                 title: "Success",
-    //                 description: "You are logged in as admin",
-    //             })
-    //         }
-    //         else {
-    //             toast({
-    //                 title: "Error",
-    //                 description: "You are not an admin",
-    //             })
-    //         }
-    //     }
-    // }
     React.useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            console.log(user?.uid)
             if (user) {
                 const { result, error } = await getDocument("users", user.uid || "")
+                console.log(result)
                 if (result?.data()?.isAdmin) {
                     setUser(user);
                     router.push("/admin/dashboard")
                 }
                 else {
+                    console.log(error)
                     toast({
                         title: "Error",
                         description: "You are not an admin",
@@ -74,7 +53,7 @@ export const AdminAuthContextProvider = ({
         });
 
         return () => unsubscribe();
-    }, [toast]);
+    }, [router, toast]);
 
     return (
         <AdminAuthContext.Provider value={{ user }}>
