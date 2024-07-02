@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,6 +10,7 @@ import LocaleSwitcher from "./Locale-Switcher";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const t = useTranslations("nav");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +30,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 w-full z-20 transition-colors duration-300 ${
-        scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+        "scrolled" ? "bg-black bg-opacity-50" : "bg-transparent"
       }`}
     >
       <nav
@@ -75,31 +77,31 @@ const Header = () => {
             href="/"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            Home
+            {t("home")}
           </Link>
           <Link
             href="/menu"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            Menu
+            {t("menu")}
           </Link>
           <a
             href="#"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            About
+            {t("about")}
           </a>
           <a
             href="#"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            Reservation
+            {t("reservation")}
           </a>
           <a
             href="#"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            Blog
+            {t("blog")}
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -107,7 +109,7 @@ const Header = () => {
             href="#"
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
-            Log in <span aria-hidden="true">→</span>
+            {t("login")} <span aria-hidden="true">→</span>
           </a>
         </div>
         <LocaleSwitcher />
@@ -124,9 +126,11 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              <Image
+                // className="h-8 w-auto"
+                width="75"
+                height="75"
+                src="/logo.png"
                 alt="logo"
               />
             </a>
@@ -159,31 +163,31 @@ const Header = () => {
                   href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Home
+                  {t("home")}
                 </Link>
                 <Link
                   href="/menu"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Menu
+                  {t("menu")}
                 </Link>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  About
+                  {t("about")}
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Reservation
+                  {t("reservation")}
                 </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Blog
+                  {t("blog")}
                 </a>
               </div>
               <div className="py-6">
@@ -191,7 +195,7 @@ const Header = () => {
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Log in
+                  {t("login")}
                 </a>
               </div>
             </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Reservation = () => {
   return (
-    <div className="pt-24 pb-24  bg-stone-100">
+    <div className="pt-24 pb-24  bg-stone-100 ltr-component">
       <div className="w-[90%] sm:w-[60%]  lg:w-[50%] xl:w-[40%] bg-white shadow-xl py-8 px-6  md:px-10 lg:px-0  lg:ps-10  mx-auto relative">
         <div className="w-full lg:w-2/3">
           <h3 className="text-center uppercase  font-mono tracking-widest font-bold text-sm text-red-500">

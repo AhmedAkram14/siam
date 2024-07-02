@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import React from "react"; // Import React explicitly
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -16,15 +18,39 @@ interface RootLayoutProps {
   children: React.ReactNode;
   params: { locale: string };
 }
+
 export default function RootLayout({
   children,
   params: { locale },
 }: Readonly<RootLayoutProps>) {
+  // Determine text direction based on locale
+  const direction = locale === "ar" ? "rtl" : "ltr";
+
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <head>
+        <style>{`body { direction: ${direction}; }`}</style>
+        <style>{`${inter.style}`}</style>
+        <style>{`
+          .ltr-component {
+            direction: ltr !important; /* Force ltr direction */
+            /* Add any other specific styles */
+          }
+        `}</style>
+      </head>
+      <body>
         <Header />
-        {children}
+        <main>
+          {React.Children.map(children, (child) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, {
+                  className: `${
+                    child.props.className ? child.props.className + " " : ""
+                  } ltr-component`,
+                })
+              : child
+          )}
+        </main>
       </body>
     </html>
   );

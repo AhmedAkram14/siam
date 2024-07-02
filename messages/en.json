@@ -1,5 +1,16 @@
 {
-  "Index": {
-    "presented the best": "presented the best"
+  "Cover": {
+    "presented the best": "presented the best",
+    "food for family": "food for family",
+    "get you fav": "Get Your Favourite Thai Food Delivered to Your Doorstep from Siam Restaurant! Enjoy the taste of your favourite Thai cuisine from the comfort of your own home.",
+    "view food": "View Food"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "reservation": "Reservation",
+    "menu": "Menu",
+    "blog": "blog",
+    "login": "Login"
   }
 }
