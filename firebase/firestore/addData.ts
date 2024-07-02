@@ -1,5 +1,5 @@
 import firebase_app from "../config";
-import { getFirestore, doc, setDoc, collection, getDocs, query, writeBatch, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, getDocs, query, writeBatch, getDoc, deleteDoc } from "firebase/firestore";
 import { categorySchemaType } from "@/schemas/category";
 import { productSchemaType } from "@/schemas/product";
 const db = getFirestore(firebase_app)
@@ -61,10 +61,42 @@ export const addNewCategory = async (category: categorySchemaType): Promise<void
         throw error;
     }
 }
+export const updateCategory = async (category: categorySchemaType, title: string): Promise<void> => {
+    try {
+        if (title === category.title_EN) {
+            const collectionRef = collection(db, "categories");
+            const docRef = doc(collectionRef, title);
+            await setDoc(docRef, category, { merge: true });
+        }
+        else {
+            const collectionRef = collection(db, "categories");
+            const oldDocRef = doc(collectionRef, title);
+
+            // Step 1: Retrieve the data from the old document
+            const oldDocSnapshot = await getDoc(oldDocRef);
+            if (oldDocSnapshot.exists()) {
+                const data = oldDocSnapshot.data();
+
+                // Step 2: Create a new document with the new name and set its data
+                const newDocRef = doc(collectionRef, category.title_EN);
+                await setDoc(newDocRef, data);
+                await setDoc(newDocRef, category, { merge: true });
+                // Step 3: Delete the old document (optional)
+                await deleteDoc(oldDocRef);
+
+            } else {
+                throw new Error(`Document ${title} does not exist`);
+            }
+        }
+    } catch (error) {
+        console.error("Error changing document name:", error);
+        throw error; // Optional: re-throw the error or handle it as per your application's needs
+    }
+}
 export const deleteCategory = async (category: categorySchemaType): Promise<void> => {
     const collectionRef = collection(db, "categories");
     const docRef = doc(collectionRef, category.title_EN);
-    await setDoc(docRef, {}, { merge: true });
+    await deleteDoc(docRef);
 }
 
 

@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { BsFileEarmarkPlus } from 'react-icons/bs';
 import { ImSpinner2 } from 'react-icons/im';
 import { Button } from './ui/button';
@@ -11,44 +11,48 @@ import { Textarea } from './ui/textarea';
 import { toast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { categorySchemaType, categorySchema } from '@/schemas/category';
-import { addNewCategory } from '@/firebase/firestore/addData';
+import { addNewCategory, updateCategory } from '@/firebase/firestore/addData';
 import { Upload } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { v4 } from "uuid";
 import { uploadImage } from '@/firebase/storge/storge';
-export default function CategoriesCreateButton() {
+import { Timestamp } from 'firebase/firestore';
+import { timestampToDate } from '@/utils/helperFunctions';
+export default function CategoriesEditButton({ category }: { category: categorySchemaType }) {
     const inputRef = useRef(null);
     const [imageUrl, setImageUrl] = useState<string | ArrayBuffer | null>(null);
     const [image, setImage] = useState<File | null>(null);
-    const router = useRouter();
     const [dialogOpen, setDialogOpen] = useState(false);
+    const router = useRouter();
     const form = useForm<categorySchemaType>({
         resolver: zodResolver(categorySchema),
-        defaultValues: {
-            createdAt: new Date(),
-        }
+        defaultValues: category
+
     })
     async function onSubmit(data: categorySchemaType) {
         try {
-            if (!image) {
-                toast({
-                    title: "Error",
-                    description: "Please upload an image",
-                    variant: 'destructive'
-                });
-                return;
-            }
-            const url = await uploadImage(image as File, `categories/${data.title_EN}/${data.title_EN}`);
-            data.imageUrl = url;
-            await addNewCategory(data);
+            // if (!image) {
+            //     toast({
+            //         title: "Error",
+            //         description: "Please upload an image",
+            //         variant: 'destructive'
+            //     });
+            //     return;
+            // }
+            // const url = await uploadImage(image as File, `categories/${data.title_EN}/${data.title_EN}`);
+            // data.imageUrl = url;
+
+            data.updatedAt = new Date()
+            await updateCategory(data, category.title_EN);
             toast({
                 title: "Success",
-                description: "Category created successfully"
+                description: "Category Updated successfully"
             })
             setDialogOpen(false);
             router.refresh();
         } catch (error) {
+            console.log(error)
             toast({
                 title: "Error",
                 description: "Something went wrong, please try again later",
@@ -75,16 +79,15 @@ export default function CategoriesCreateButton() {
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
                 <Button
-                    variant={"outline"}
-                    className='w-auto group border border-primary/20 h-auto items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4'>
-                    <BsFileEarmarkPlus className='h-8 w-8 text-muted-foreground group-hover:text-primary' />
-                    <p className='font-bold text-xl text-muted-foreground group-hover:text-primary'>Create new Category</p>
+                    variant={"ghost"}
+                    className="w-full"
+                >
+                    Edit
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Create Category</DialogTitle>
-                    <DialogDescription>Create a new category to start add products to it</DialogDescription>
+                    <DialogTitle>Edit {category.title_EN}</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
@@ -145,8 +148,9 @@ export default function CategoriesCreateButton() {
                         onClick={
                             form.handleSubmit(onSubmit)
                         }
+                        type='submit'
                         disabled={form.formState.isSubmitting} className='w-full mt-4'>
-                        {!form.formState.isSubmitting ? "save" : <ImSpinner2 className='animate-spin' />}
+                        {!form.formState.isSubmitting ? "Edit" : <ImSpinner2 className='animate-spin' />}
                     </Button>
                 </DialogFooter>
             </DialogContent>

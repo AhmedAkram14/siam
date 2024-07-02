@@ -1,6 +1,7 @@
 import { categorySchemaType } from "@/schemas/category";
 import firebase_app from "../config";
-import { getFirestore, doc, getDoc, collection, getDocs, QueryDocumentSnapshot, DocumentData, query } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, QueryDocumentSnapshot, DocumentData, query, Timestamp } from "firebase/firestore";
+import { timestampToDate } from "@/utils/helperFunctions";
 
 const db = getFirestore(firebase_app)
 export async function getDocument(collection: string, id: string) {
@@ -38,7 +39,12 @@ export const getCollectionAndDocuments = async (): Promise<categorySchemaType[]>
     const collectionRef = collection(db, "categories");
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()) as categorySchemaType[];
+    return querySnapshot.docs.map((docSnapshot) => {
+        const doc = JSON.parse(JSON.stringify(docSnapshot.data()));
+        const createdAt = timestampToDate(doc.createdAt as Timestamp);
+        const updatedAt = timestampToDate(doc.updatedAt as Timestamp);
+        return { ...doc, createdAt: createdAt, updatedAt: updatedAt }
+    }) as categorySchemaType[];
 };
 
 export const getCategory = async (categoryTitle: string): Promise<categorySchemaType | undefined> => {
