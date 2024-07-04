@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { AiFillCar } from "react-icons/ai";
-import { BsBuilding } from "react-icons/bs";
+import { AiFillCar } from 'react-icons/ai';
+import { BsBuilding } from 'react-icons/bs';
 
-import Button from "./Button";
-import Overlay from "./overlay";
+import Button from './Button';
+import Overlay from './overlay';
 
 const Visit = () => {
   return (
-    <div className="flex flex-col lg:flex-row ">
+    <div className="flex flex-col lg:flex-row ltr-component">
       <div className="relative w-full lg:w-1/2">
         <Overlay />
         <img
