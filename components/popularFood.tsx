@@ -1,23 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import { GiKnifeFork } from 'react-icons/gi';
-import { RxDividerHorizontal } from 'react-icons/rx';
+import { useLocale, useTranslations } from "next-intl";
+import { GiKnifeFork } from "react-icons/gi";
+import { RxDividerHorizontal } from "react-icons/rx";
 
 import {
   Carousel,
   CarouselContent,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
+} from "@/components/ui/carousel";
 
-import SliderCard from './sliderCard';
+import SliderCard from "./sliderCard";
 
-interface CarouselSpacingProps { }
+interface CarouselSpacingProps {}
 
 const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
+  const t = useTranslations("popular");
+  const locale = useLocale(); // Get the current locale
   return (
     <div className="pt-24 pb-24  bg-stone-100 w-full">
-      <h2 className="text-center text-3xl uppercase">Siam Popular Dishes</h2>
+      <h2 className="text-center text-3xl uppercase">
+        {t("siam popular dishes")}
+      </h2>
       <div className="flex justify-center mt-2 mb-2">
         <span className="text-[#999999] text-[50px]">
           <RxDividerHorizontal />
@@ -29,45 +34,33 @@ const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
           <RxDividerHorizontal />
         </span>
       </div>
-      <p className="w-[70%] mb-8 mx-auto text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis dolor
-        provident recusandae harum omnis quae perferendis officia, ducimus
-        necessitatibus fugit perspiciatis adipisci expedita corporis tenetur in
-        dicta aut reprehenderit magnam.
-      </p>
+      <p className="w-[70%] mb-8 mx-auto text-center">{t("discover")}</p>
 
-      <Carousel
-        className="max-w-[80%] m-auto">
+      <Carousel className="max-w-[80%] m-auto">
         <CarouselContent className="m-auto">
           {/* {Array.from({ length: 5 }).map((_, index) => ( */}
           <SliderCard
             imgsrc="/pad thai.jpg"
             imgalt="pad thai"
-            title="Pad Thai with crap"
+            title={t("pad thai")}
             price={50}
           />
           <SliderCard
             imgsrc="/fried tailipa with sweets.jpg"
             imgalt="fried tailipa"
-            title="Fried tailipa with sweets"
+            title={t("Fried tilapia")}
             price={55}
           />
           <SliderCard
             imgsrc="/spicy minced duck salad.jpg"
             imgalt="spicy minced duck salad"
-            title="Spicy minced duck salad"
+            title={t("Spicy minced")}
             price={40}
           />
           <SliderCard
             imgsrc="/pad thai.jpg"
             imgalt="corn salad with shrimp"
-            title="Corn salad with shrimp"
-            price={40}
-          />
-          <SliderCard
-            imgsrc="/pad thai.jpg"
-            imgalt="corn salad with shrimp"
-            title="Corn salad with shrimp"
+            title={t("Corn salad")}
             price={40}
           />
         </CarouselContent>

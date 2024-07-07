@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useLocale, useTranslations } from "next-intl";
 import { BiCartAdd } from "react-icons/bi";
 import { FaStar } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
@@ -22,6 +23,8 @@ const SliderCard: React.FC<CardContent> = ({
   price,
   imgalt,
 }) => {
+  const t = useTranslations("popular");
+  const locale = useLocale(); // Get the current locale
   return (
     <CarouselItem className=" lg:basis-1/3 p-0">
       <Card className="max-w-[450px]  mx-auto">
@@ -41,7 +44,9 @@ const SliderCard: React.FC<CardContent> = ({
               ))}
             </div>
 
-            <p className="text-red-500 font-bold">{price} AED</p>
+            <p className="text-red-500 font-bold">
+              {price} {t("curr")}
+            </p>
           </div>
         </CardContent>
       </Card>

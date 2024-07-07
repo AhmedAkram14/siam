@@ -13,6 +13,15 @@
     "blog": "blog",
     "login": "Login"
   },
+  "popular": {
+    "siam popular dishes": "Siam Popular Dishes",
+    "discover": "Discover the essence of Thailand in every bite at Siam, your premier destination for authentic Thai cuisine in Dubai. Whether you are craving classic dishes or modern takes on traditional flavors, our restaurant offers a warm and inviting atmosphere perfect for any occasion.",
+    "pad thai": "Pad Thai with crab",
+    "Fried tilapia": "Fried tilapia with sweets",
+    "Spicy minced": "Spicy minced duck salad",
+    "Corn salad": "Corn salad with shrimp",
+    "curr": "AED"
+  },
   "visit": {
     "come": "Come&Visit",
     "choose": "Come and choose your favorite thai food",
