@@ -23,8 +23,8 @@ const SliderCard: React.FC<CardContent> = ({
   imgalt,
 }) => {
   return (
-    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-      <Card className="w-[300px] md:w-[350px]  mx-8">
+    <CarouselItem className=" lg:basis-1/3 p-0">
+      <Card className="max-w-[450px]  mx-auto">
         <CardContent className="p-0 aspect-square relative overflow-hidden ">
           <div className="relative">
             <Overlay optionalStyle=" flex items-center justify-center gap-4">
