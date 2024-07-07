@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 import LocaleSwitcher from './Locale-Switcher';
 
-const Header = ({ locale }: { locale: string }) => {
+const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const t = useTranslations("nav");
@@ -28,12 +28,13 @@ const Header = ({ locale }: { locale: string }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [locale]);
+  }, []);
 
   return (
     <header
-      className={`fixed top-0 w-full z-40 transition-colors duration-300 ${scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
-        }`}
+      className={`fixed top-0 w-full z-40 transition-colors duration-300 ${
+        scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+      }`}
     >
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8"
