@@ -33,7 +33,7 @@ export default async function RootLayout({
   params: { locale }
 }: Readonly<RootLayoutProps>) {
   const direction = locale === "ar" ? "rtl" : "ltr";
-  const messages = await getMessages();
+  // const messages = await getMessages();
   unstable_setRequestLocale(locale);
 
   return (
@@ -55,10 +55,10 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-            <Toaster />
-          </NextIntlClientProvider>
+          {/* <NextIntlClientProvider messages={messages}> */}
+          {children}
+          <Toaster />
+          {/* </NextIntlClientProvider> */}
         </ThemeProvider>
 
       </body>

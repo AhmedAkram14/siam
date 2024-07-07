@@ -12,11 +12,11 @@ import {
 
 import SliderCard from './sliderCard';
 
-interface CarouselSpacingProps {}
+interface CarouselSpacingProps { }
 
 const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
   return (
-    <div className="pt-24 pb-24  bg-stone-100">
+    <div className="pt-24 pb-24  bg-stone-100 w-full">
       <h2 className="text-center text-3xl uppercase">Siam Popular Dishes</h2>
       <div className="flex justify-center mt-2 mb-2">
         <span className="text-[#999999] text-[50px]">
@@ -36,8 +36,9 @@ const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
         dicta aut reprehenderit magnam.
       </p>
 
-      <Carousel className="w-[80%]  mx-auto ">
-        <CarouselContent className="">
+      <Carousel
+        className="max-w-[80%] m-auto">
+        <CarouselContent className="m-auto">
           {/* {Array.from({ length: 5 }).map((_, index) => ( */}
           <SliderCard
             imgsrc="/pad thai.jpg"
@@ -58,13 +59,13 @@ const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
             price={40}
           />
           <SliderCard
-            imgsrc="/corn salad with shrimp.jpg"
+            imgsrc="/pad thai.jpg"
             imgalt="corn salad with shrimp"
             title="Corn salad with shrimp"
             price={40}
           />
           <SliderCard
-            imgsrc="/corn salad with shrimp.jpg"
+            imgsrc="/pad thai.jpg"
             imgalt="corn salad with shrimp"
             title="Corn salad with shrimp"
             price={40}
