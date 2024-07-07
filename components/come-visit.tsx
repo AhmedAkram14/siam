@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useLocale, useTranslations } from "next-intl";
 import { AiFillCar } from "react-icons/ai";
 import { BsBuilding } from "react-icons/bs";
 
@@ -7,8 +8,11 @@ import Button from "./Button";
 import Overlay from "./overlay";
 
 const Visit = () => {
+  const t = useTranslations("visit");
+  const locale = useLocale(); // Get the current locale
+
   return (
-    <div className="flex flex-col lg:flex-row ">
+    <div className="flex flex-col lg:flex-row ltr-component lg:h-[80vh]">
       <div className="relative w-full lg:w-1/2">
         <Overlay />
         <img
@@ -22,25 +26,28 @@ const Visit = () => {
           <BsBuilding className="text-6xl text-gray-300" />
         </div>
         <h2 className="font-zilla text-5xl font-extrabold mb-5 mt-[-20px]">
-          Come&Visit<span className="text-red-500">.</span>
+          <span className={`text-red-500 ${locale == "en" ? "hidden" : ""}`}>
+            .
+          </span>
+          {t("come")}
+          <span className={`text-red-500 ${locale == "ar" ? "hidden" : ""}`}>
+            .
+          </span>
         </h2>
-        <p className="text-neutral-500 text-lg italic mb-3">
-          Come and choose your favorite thai food
+        <p className="text-neutral-500 font-mont text-lg italic mb-3">
+          {t("choose")}
         </p>
         <img
           src="https://theme.ridianur.com/gehou/wp-content/uploads/2018/03/divider.png"
           alt="tree"
           className="mx-auto opacity-30 mb-8"
         />
-        <p className="text-neutral-500 mx-auto mb-3">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam,
-          iste sed tenetur dolores eveniet beatae officia autem nulla provident?
-          Similique nostrum corporis dolore alias assumenda suscipit expedita
-          vero veritatis laborum!
+        <p className="text-neutral-500 mx-auto mb-3 lg:px-10 font-mont">
+          {t("Experience the authentic")}
         </p>
         <Button optionalStyle="mx-auto border-2 border-red-500 hover:scale-90	">
           <AiFillCar />
-          Contact Us
+          {t("contact")}
         </Button>
       </div>
     </div>

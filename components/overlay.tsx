@@ -6,7 +6,7 @@ interface overlayProps {
 }
 const Overlay: React.FC<overlayProps> = ({ children, optionalStyle }) => {
   return (
-    <div className={`absolute inset-0 bg-black opacity-70 ` + optionalStyle}>
+    <div className={`absolute inset-0 bg-black opacity-60 ` + optionalStyle}>
       {children}
     </div>
   );
