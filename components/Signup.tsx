@@ -1,15 +1,31 @@
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { CiLock } from "react-icons/ci";
 import { FaFacebook, FaGoogle, FaUser } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 
 const SignUp = () => {
+  const t = useTranslations("login");
+  const locale = useLocale();
   return (
     <div className="min-h-[50%] md:min-h-screen py-6 md:py-0 w-full text-center  flex flex-col justify-center items-center">
       <motion.div>
-        <h2 className="text-3xl capitalize font-bold mb-6 font-zilla">
-          Register a new account
-          <span className="text-red-500 text-4xl">.</span>
+        <h2 className={`text-3xl capitalize font-bold mb-6 font-zilla `}>
+          <span
+            className={`text-red-500 text-4xl ${
+              locale == "en" ? "hidden" : ""
+            }`}
+          >
+            .
+          </span>
+          {t("register")}
+          <span
+            className={`text-red-500 text-4xl ${
+              locale == "ar" ? "hidden" : ""
+            }`}
+          >
+            .
+          </span>
         </h2>
         <div className="flex justify-center space-x-4 mb-6">
           <button>
@@ -20,14 +36,14 @@ const SignUp = () => {
           </button>
         </div>
         <p className="text-center font-mont font-medium text-slate-500 mb-6">
-          or register with your email
+          {t("or")}
         </p>
         <form className="w-full">
           <div className="mb-4 relative">
             <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="text"
-              placeholder="User Name"
+              placeholder={t("username")}
               className="w-full p-3 py-4 pl-10 border outline-none border-gray-300 rounded-sm mt-1 bg-[#E8E8E8]"
             />
           </div>
@@ -35,7 +51,7 @@ const SignUp = () => {
             <MdOutlineMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="email"
-              placeholder="Email address"
+              placeholder={t("email")}
               className="w-full p-3 py-4 pl-10 border outline-none border-gray-300 rounded-sm mt-1 bg-[#E8E8E8]"
             />
           </div>
@@ -44,7 +60,7 @@ const SignUp = () => {
 
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("password")}
               className="w-full p-3 py-4 pl-10 border outline-none border-gray-300 rounded-sm mt-1 bg-[#E8E8E8]"
             />
           </div>
@@ -52,7 +68,7 @@ const SignUp = () => {
             type="submit"
             className=" bg-red-500 text-white px-6 py-3 font-bold font-mont border-2 border-red-500 hover:scale-90 hover:bg-white transition-all duration-300 hover:text-red-500 "
           >
-            Sign Up
+            {t("sign up")}
           </button>
         </form>
       </motion.div>

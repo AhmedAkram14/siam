@@ -1,12 +1,12 @@
-import '../../globals.css';
+import "../../globals.css";
 
-import React from 'react'; // Import React explicitly
+import React from "react"; // Import React explicitly
 
-import { unstable_setRequestLocale } from 'next-intl/server';
-import { Inter } from 'next/font/google';
+import { unstable_setRequestLocale } from "next-intl/server";
+import { Inter } from "next/font/google";
 
-import Header from '@/components/Header';
-import { AuthContextProvider } from '@/context/AuthContext';
+import Header from "@/components/Header";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 

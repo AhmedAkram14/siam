@@ -2,13 +2,15 @@
 import { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import Login from "./Login";
 import SignUp from "./Signup";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const t = useTranslations("login");
+
   const locale = useLocale(); // Get the current locale
   const transition = { duration: 2 }; // Slow down animation
 
@@ -38,16 +40,13 @@ const AuthForm = () => {
                 transition={transition} // Apply transition
                 className="ltr-component min-h-[50%] md:min-h-screen flex flex-col  items-center justify-center p-8 bg-gradient-to-r from-red-500 to-purple-500 text-white"
               >
-                <h2 className="text-3xl font-bold mb-6">Welcome Back!</h2>
-                <p className="mb-6">
-                  Please sign in to your account with the given details to
-                  continue.
-                </p>
+                <h2 className="text-3xl font-bold mb-6">{t("welcome back")}</h2>
+                <p className="mb-6 text-center">{t("please sign")}</p>
                 <button
                   onClick={() => setIsLogin(false)}
                   className="bg-transparent border border-white py-2 px-4"
                 >
-                  Sign Up
+                  {t("sign up")}
                 </button>
               </motion.div>
             </>
@@ -61,15 +60,13 @@ const AuthForm = () => {
                 transition={transition} // Apply transition
                 className="ltr-component min-h-[50%] md:min-h-screen flex flex-col  items-center justify-center p-8 bg-gradient-to-r from-red-500 to-purple-500 text-white"
               >
-                <h2 className="text-3xl font-bold mb-6">Hello Friend!</h2>
-                <p className="mb-6">
-                  Please provide the information to register your account.
-                </p>
+                <h2 className="text-3xl font-bold mb-6">{t("hello friend")}</h2>
+                <p className="mb-6 text-center">{t("provide")}</p>
                 <button
                   onClick={() => setIsLogin(true)}
                   className="bg-transparent border border-white py-2 px-4"
                 >
-                  Sign In
+                  {t("login")}
                 </button>
               </motion.div>
               <motion.div
