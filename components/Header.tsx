@@ -1,14 +1,11 @@
 "use client";
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from "react";
 
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
 
-import LocaleSwitcher from './Locale-Switcher';
+import LocaleSwitcher from "./Locale-Switcher";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

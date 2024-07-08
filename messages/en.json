@@ -47,5 +47,20 @@
     "address2": "Flayva Food Hall, Al Ghurair Centre, Dubai",
     "copyrights": "ALL RIGHTS RESERVED.",
     "siam": "SIAM."
+  },
+  "login": {
+    "email": "Email address",
+    "password": "Password",
+    "login": "Sign In",
+    "forgot": "Forgot Password?",
+    "register": "Register A New Account",
+    "or": "or Sign in with your email id",
+    "username": "User Name",
+    "sign up": "Sign Up",
+    "sign in to your account": "sign in to your account",
+    "welcome back": "Welcome Back!",
+    "please sign": "Please sign in to your account with the given details to continue.",
+    "hello friend": "Hello Friend!",
+    "provide": "Please provide the information to register your account."
   }
 }
