@@ -1,6 +1,7 @@
 import * as z from 'zod';
 import { Timestamp } from 'firebase/firestore';
 export const categorySchema = z.object({
+    id: z.string(),
     title_EN: z.string(),
     title_AR: z.string(),
     imageUrl: z.string().optional(),
@@ -15,7 +16,10 @@ export const categorySchema = z.object({
         name_AR: z.string(),
         description_EN: z.string(),
         description_AR: z.string(),
-        price: z.number()
+        price: z.number(),
+        status: z.union([z.literal('active'), z.literal('archived')]).default("active"),
+        createdAt: z.date(),
+        updatedAt: z.date().optional(),
     })).default(() => [])
 });
 

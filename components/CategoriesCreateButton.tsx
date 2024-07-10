@@ -15,8 +15,8 @@ import { addNewCategory } from '@/firebase/firestore/addData';
 import { Upload } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { v4 } from "uuid";
 import { uploadImage } from '@/firebase/storge/storge';
+import { v4 } from 'uuid';
 export default function CategoriesCreateButton() {
     const inputRef = useRef(null);
     const [imageUrl, setImageUrl] = useState<string | ArrayBuffer | null>(null);
@@ -27,6 +27,7 @@ export default function CategoriesCreateButton() {
         resolver: zodResolver(categorySchema),
         defaultValues: {
             createdAt: new Date(),
+            id: v4(),
         }
     })
     async function onSubmit(data: categorySchemaType) {
@@ -39,7 +40,7 @@ export default function CategoriesCreateButton() {
                 });
                 return;
             }
-            const url = await uploadImage(image as File, `categories/${data.title_EN}/${data.title_EN}`);
+            const url = await uploadImage(image as File, `categories/${data.id}`);
             data.imageUrl = url;
             await addNewCategory(data);
             toast({

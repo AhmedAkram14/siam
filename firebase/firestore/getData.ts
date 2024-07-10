@@ -41,9 +41,9 @@ export const getCollectionAndDocuments = async (): Promise<categorySchemaType[]>
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((docSnapshot) => {
         const doc = JSON.parse(JSON.stringify(docSnapshot.data()));
-        const createdAt = timestampToDate(doc.createdAt as Timestamp);
-        const updatedAt = timestampToDate(doc.updatedAt as Timestamp);
-        return { ...doc, createdAt: createdAt, updatedAt: updatedAt }
+        doc.createdAt = timestampToDate(doc.createdAt as Timestamp);
+        if (doc.updatedAt) doc.updatedAt = timestampToDate(doc.updatedAt as Timestamp);
+        return { ...doc }
     }) as categorySchemaType[];
 };
 
@@ -54,7 +54,14 @@ export const getCategory = async (categoryTitle: string): Promise<categorySchema
     try {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            return { ...docSnap.data() } as categorySchemaType;
+            const category = docSnap.data();
+            for (const item of category.items) {
+                item.createdAt = timestampToDate(item.createdAt as Timestamp);
+                if (item.updatedAt) {
+                    item.updatedAt = timestampToDate(item.updatedAt as Timestamp);
+                }
+            }
+            return { ...category } as categorySchemaType;
         } else {
             console.log(`No such document with id ${categoryTitle}`);
             return undefined;

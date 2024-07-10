@@ -19,5 +19,24 @@ export const uploadImage = async (file: File, path: string): Promise<string> => 
         throw error; // You can handle or rethrow the error as needed
     }
 }
+// change directory name
+// async function renameDirectory(oldDirectoryName: string, newDirectoryName: string) {
+//     try {
+//         // List all files in the old directory
+//         const [files] = await bucket.getFiles({
+//             prefix: `${oldDirectoryName}/`,
+//         });
+
+//         // Move each file to the new directory
+//         await Promise.all(files.map(async (file) => {
+//             const newFilePath = file.name.replace(oldDirectoryName, newDirectoryName);
+//             await bucket.file(file.name).move(newFilePath);
+//         }));
+
+//         console.log(`Directory '${oldDirectoryName}' renamed to '${newDirectoryName}' successfully.`);
+//     } catch (error) {
+//         console.error('Error renaming directory:', error);
+//     }
+// }
 
 export default storage;

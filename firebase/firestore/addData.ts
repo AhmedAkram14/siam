@@ -2,6 +2,7 @@ import firebase_app from "../config";
 import { getFirestore, doc, setDoc, collection, getDocs, query, writeBatch, getDoc, deleteDoc } from "firebase/firestore";
 import { categorySchemaType } from "@/schemas/category";
 import { productSchemaType } from "@/schemas/product";
+import { getCategory } from "./getData";
 const db = getFirestore(firebase_app)
 export default async function addData(collection: string, id: string, data: any) {
     let result = null;
@@ -52,15 +53,23 @@ export default async function addData(collection: string, id: string, data: any)
 
 export const addNewCategory = async (category: categorySchemaType): Promise<void | Error> => {
     try {
-        const collectionRef = collection(db, "categories");
+        const collectionRef = collection(db, 'categories');
         const docRef = doc(collectionRef, category.title_EN);
+
+        // Check if document already exists
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+            throw new Error(`Document with title ${category.title_EN} already exists.`);
+        }
+
+        // Document does not exist, proceed to create it
         await setDoc(docRef, category);
-    }
-    catch (error) {
-        console.log("Error adding category:", error);
+        console.log(`Document ${category.title_EN} successfully added.`);
+    } catch (error) {
+        console.error('Error adding category:', error);
         throw error;
     }
-}
+};
 export const updateCategory = async (category: categorySchemaType, title: string): Promise<void> => {
     try {
         if (title === category.title_EN) {
@@ -100,12 +109,27 @@ export const deleteCategory = async (category: categorySchemaType): Promise<void
 }
 
 
-export const addNewCategoryItem = async (category: categorySchemaType, item: productSchemaType): Promise<void> => {
-    const collectionRef = collection(db, "categories");
-    const docRef = doc(collectionRef, category.title_EN);
-    await setDoc(docRef, {
-        items: [...category.items, item]
-    }, { merge: true });
+// export const addNewCategoryItem = async (category: categorySchemaType, item: productSchemaType): Promise<void> => {
+//     const collectionRef = collection(db, "categories");
+//     const docRef = doc(collectionRef, category.title_EN);
+//     await setDoc(docRef, {
+//         items: [...category.items, item]
+//     }, { merge: true });
+// }
+export const addNewCategoryItem = async (categoryTitle: string, item: productSchemaType): Promise<void> => {
+    try {
+        const collectionRef = collection(db, "categories");
+        const docRef = doc(collectionRef, categoryTitle);
+        const category = await getCategory(categoryTitle)
+        if (category) {
+            await setDoc(docRef, {
+                items: [...category.items, item]
+            }, { merge: true });
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
 }
 
 export const deleteCategoryItem = async (category: categorySchemaType, item: productSchemaType): Promise<void> => {
