@@ -19,7 +19,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import Link from "next/link"
 import AddProductImages from "./components/AddProductImages"
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { productSchema, productSchemaType } from "@/schemas/product";
 import { toast } from "@/components/ui/use-toast";
 import { uploadImage } from "@/firebase/storge/storge";
@@ -27,13 +27,24 @@ import { addNewCategoryItem } from "@/firebase/firestore/addData";
 import { useRouter } from "next/navigation";
 import { v4 } from 'uuid';
 import { ImSpinner2 } from "react-icons/im";
+import { categorySchemaType } from "@/schemas/category";
+import { getCategory } from "@/firebase/firestore/getData";
 
 export default function Add({ params: { category } }: { params: { category: string } }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [categoryData, setCategoryData] = useState<categorySchemaType>({} as categorySchemaType);
     const [imagesUrl, setImagesUrl] = useState<(string | ArrayBuffer | null)[]>([]);
     const [images, setImages] = useState<(File | null)[]>([]);
     const [productData, setProductData] = useState<productSchemaType>({} as productSchemaType);
+    useEffect(() => {
+        (async () => {
+            const c = await getCategory(category);
+            if (c) {
+                setCategoryData(c)
+            }
+        })();
+    }, [category])
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         let key = e.target.name;
         let value: string | number = e.target.value;
@@ -42,7 +53,6 @@ export default function Add({ params: { category } }: { params: { category: stri
         }
         setProductData((prevData) => ({ ...prevData, [key]: value }))
     }
-    console.log(productData)
     const handleSubmit = async () => {
         if (images.length < 1) {
             toast({
@@ -59,6 +69,14 @@ export default function Add({ params: { category } }: { params: { category: stri
                 variant: 'destructive'
             })
             return;
+        }
+        const index = categoryData.items.findIndex(CategoryItem => CategoryItem.name_EN === productData.name_EN)
+        if (index !== -1) {
+            toast({
+                title: "Error",
+                description: "there is a product with the same name",
+                variant: 'destructive'
+            })
         }
         try {
             setIsLoading(true);

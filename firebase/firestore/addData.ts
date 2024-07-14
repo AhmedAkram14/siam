@@ -3,6 +3,8 @@ import { getFirestore, doc, setDoc, collection, getDocs, query, writeBatch, getD
 import { categorySchemaType } from "@/schemas/category";
 import { productSchemaType } from "@/schemas/product";
 import { getCategory } from "./getData";
+import { toast } from "@/components/ui/use-toast";
+import { deleteImages } from "../storge/storge";
 const db = getFirestore(firebase_app)
 export default async function addData(collection: string, id: string, data: any) {
     let result = null;
@@ -135,6 +137,7 @@ export const addNewCategoryItem = async (categoryTitle: string, item: productSch
 export const deleteCategoryItem = async (category: categorySchemaType, item: productSchemaType): Promise<void> => {
     const collectionRef = collection(db, "categories");
     const docRef = doc(collectionRef, category.title_EN);
+    await deleteImages(`products/${item.id}`);
     await setDoc(docRef, {
         items: category.items.filter((i) => i.id !== item.id)
     }, { merge: true });

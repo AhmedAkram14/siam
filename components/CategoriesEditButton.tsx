@@ -42,7 +42,6 @@ export default function CategoriesEditButton({ category }: { category: categoryS
             // }
             // const url = await uploadImage(image as File, `categories/${data.title_EN}/${data.title_EN}`);
             // data.imageUrl = url;
-
             data.updatedAt = new Date()
             await updateCategory(data, category.title_EN);
             toast({

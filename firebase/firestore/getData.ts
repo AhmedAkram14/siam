@@ -43,6 +43,12 @@ export const getCollectionAndDocuments = async (): Promise<categorySchemaType[]>
         const doc = JSON.parse(JSON.stringify(docSnapshot.data()));
         doc.createdAt = timestampToDate(doc.createdAt as Timestamp);
         if (doc.updatedAt) doc.updatedAt = timestampToDate(doc.updatedAt as Timestamp);
+        for (const item of doc.items) {
+            item.createdAt = timestampToDate(item.createdAt as Timestamp);
+            if (item.updatedAt) {
+                item.updatedAt = timestampToDate(item.updatedAt as Timestamp);
+            }
+        }
         return { ...doc }
     }) as categorySchemaType[];
 };
