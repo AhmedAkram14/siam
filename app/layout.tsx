@@ -39,14 +39,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <style>{`body { direction: ${direction}; }`}</style>
         <style>{`${inter.style}`}</style>
-        <style>{`
-        .ltr-component {
-          direction: ltr !important; /* Force ltr direction */
-          /* Add any other specific styles */
-        }
-      `}</style>
       </head>
       <body className={inter.className}>
         <ThemeProvider
@@ -55,10 +48,10 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-            <Toaster />
-          </NextIntlClientProvider>
+          {/* <NextIntlClientProvider messages={messages}> */}
+          {children}
+          <Toaster />
+          {/* </NextIntlClientProvider> */}
         </ThemeProvider>
 
       </body>
