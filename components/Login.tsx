@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { ImSpinner2 } from "react-icons/im";
 
 
 const Login = () => {
@@ -39,7 +40,6 @@ const Login = () => {
           title: "Error",
           description: error?.message || t("loginError")
         })
-        return
       }
       else {
         router.push("/")
@@ -123,8 +123,10 @@ const Login = () => {
             <Button
               type="submit"
               className="bg-red-500 text-white px-6 py-3 font-bold font-mont border-2 border-red-500 hover:scale-90 hover:bg-white transition-all duration-300 hover:text-red-500"
+              disabled={form.formState.isSubmitting}
             >
-              {t("login")}
+              {!form.formState.isSubmitting ? t("login") : <ImSpinner2 className='animate-spin' />}
+
             </Button>
           </form>
         </Form>

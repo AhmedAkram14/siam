@@ -52,6 +52,7 @@
     "email": "Email address",
     "userNameError": "you should write a valid user name",
     "loginError": "something went wrong you can,t login",
+    "signUpError": "something went wrong you can,t sign up",
     "emailError": "you should write a valid email",
     "passwordError": "you should write a valid password",
     "password": "Password",

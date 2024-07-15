@@ -13,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import signUp from "@/firebase/auth/signup";
+import { ImSpinner2 } from "react-icons/im";
 
 const SignUp = () => {
   const t = useTranslations("login");
@@ -38,15 +39,17 @@ const SignUp = () => {
       if (error) {
         toast({
           title: "Error",
-          description: error?.message || t("loginError")
+          description: error?.message || t("signUpError")
         })
-        return
+      }
+      else {
+        router.push("/")
       }
     }
     catch (error) {
       toast({
         title: "Error",
-        description: t("loginError"),
+        description: t("signUpError"),
       })
     }
   }
@@ -57,7 +60,7 @@ const SignUp = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "something went wrong you can,t sign up",
+        description: t("signUpError"),
       })
 
     }
@@ -133,8 +136,10 @@ const SignUp = () => {
             <Button
               type="submit"
               className=" mt-2 bg-red-500 text-white px-6 py-3 font-bold font-mont border-2 border-red-500 hover:scale-90 hover:bg-white transition-all duration-300 hover:text-red-500 "
+              disabled={form.formState.isSubmitting}
             >
-              {t("sign up")}
+
+              {!form.formState.isSubmitting ? t("sign up") : <ImSpinner2 className='animate-spin' />}
             </Button>
           </form>
         </Form>
