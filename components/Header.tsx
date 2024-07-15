@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Link } from '../navigation';
 import LocaleSwitcher from "./Locale-Switcher";
 import { AuthContext } from "@/context/AuthContext";
+import User from "./User";
 
 const Header = ({ locale }: { locale: string }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -103,7 +104,7 @@ const Header = ({ locale }: { locale: string }) => {
           </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {user ? <h2>{user.displayName}</h2> : <Link
+          {user ? <User user={user} /> : <Link
             href="/login"
             locale={locale as "ar" | "en" | undefined}
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "

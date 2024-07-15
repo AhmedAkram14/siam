@@ -7,8 +7,8 @@ const Reservation = () => {
   const t = useTranslations("reservation");
   const locale = useLocale(); // Get the current locale
   return (
-    <div className="pt-24 pb-24  bg-stone-100 ltr-component">
-      <div className="w-[90%] sm:w-[60%]  lg:w-[50%] xl:w-[40%] bg-white shadow-xl py-8 px-6  md:px-10 lg:px-0  lg:ps-10  mx-auto relative">
+    <div className="pt-24 pb-24  bg-stone-100 ltr-component" >
+      <div className="w-[90%] sm:w-[60%]  lg:w-[50%] xl:w-[40%] bg-white shadow-xl py-8 px-6  md:px-10 lg:px-0  lg:ps-10  mx-auto relative" style={{ direction: "ltr" }}>
         <div className="w-full lg:w-2/3">
           <h3 className="text-center uppercase  font-mono tracking-widest font-bold text-sm text-red-500">
             {t("table reservation")}
@@ -23,8 +23,8 @@ const Reservation = () => {
             alt="sperator"
             className="mx-auto"
           />
-          <div className="flex max-w-full">
-            <form action="" className="w-full pb-36 lg:pb-0 ">
+          <div className="flex max-w-full" >
+            <form action="" className="w-full pb-36 lg:pb-0 " >
               <input
                 type="text"
                 placeholder={t("name")}

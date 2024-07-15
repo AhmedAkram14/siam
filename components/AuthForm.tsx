@@ -1,19 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 
 import Login from "./Login";
 import SignUp from "./Signup";
+import { AuthContext } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const AuthForm = () => {
+  const { user } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
   const t = useTranslations("login");
+  const router = useRouter();
 
   const locale = useLocale(); // Get the current locale
   const transition = { duration: 2 }; // Slow down animation
-
+  useEffect(() => {
+    if (user) {
+      router.push("/")
+    }
+  }, [router, user])
   return (
     <div
       className={`min-h-screen flex items-center justify-center bg-background w-full rtl-component`}
