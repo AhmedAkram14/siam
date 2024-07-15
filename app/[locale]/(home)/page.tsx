@@ -18,7 +18,6 @@ export default function Home({
       <Visit />
       <Reservation />
       <Footer />
-      <AuthForm />
     </>
   );
 }

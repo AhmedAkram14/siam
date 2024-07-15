@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import Overlay from "./overlay";
 import { CarouselItem } from "./ui/carousel";
+import Image from "next/image";
 
 interface CardContent {
   title: string;
@@ -26,7 +27,7 @@ const SliderCard: React.FC<CardContent> = ({
   const t = useTranslations("popular");
   const locale = useLocale(); // Get the current locale
   return (
-    <CarouselItem className=" lg:basis-1/3 p-0">
+    <CarouselItem className=" lg:basis-1/2 xl:basis-1/3 p-0">
       <Card className="max-w-[450px]  mx-auto">
         <CardContent className="p-0 aspect-square relative overflow-hidden ">
           <div className="relative">
@@ -34,7 +35,7 @@ const SliderCard: React.FC<CardContent> = ({
               <BiCartAdd className="text-orange-500 text-4xl cursor-pointer" />
               <MdOutlineFavoriteBorder className="text-red-500 text-4xl cursor-pointer" />
             </Overlay>
-            <img src={imgsrc} alt={imgalt} />
+            <Image src={imgsrc} alt={imgalt} width={500} height={500} />
           </div>
           <div className="p-4 text-center">
             <h2 className="font-zilla text-2xl font-extrabold">{title}</h2>

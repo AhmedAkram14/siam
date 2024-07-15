@@ -13,7 +13,9 @@ export const config = {
   // matcher: ["/", "/(ar|en)/:path*"]
 
   matcher: [
-    '/admin', // Redirect to default locale + admin
-    "/", "/(ar|en)/:path*"
+    '/admin',
+    '/login',
+    "/", "/(ar|en)/:path*",
+
   ],
 };

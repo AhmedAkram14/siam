@@ -16,7 +16,7 @@ const AuthForm = () => {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center bg-gray-100 w-full rtl-component`}
+      className={`min-h-screen flex items-center justify-center bg-background w-full rtl-component`}
     >
       <motion.div className="w-full h-screen grid grid-rows-2 md:grid md:grid-cols-2">
         <AnimatePresence>
@@ -28,7 +28,7 @@ const AuthForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 20, x: -800 }}
                 transition={transition} // Apply transition
-                className="ltr-component bg-white  md:h-screen"
+                className="ltr-component bg-background  md:h-screen"
               >
                 <Login />
               </motion.div>
@@ -75,7 +75,7 @@ const AuthForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 20, x: 800 }}
                 transition={transition} // Apply transition
-                className="ltr-component bg-white md:h-screen"
+                className="ltr-component bg-background md:h-screen"
               >
                 <SignUp />
               </motion.div>

@@ -13,14 +13,14 @@ import {
 
 import SliderCard from "./sliderCard";
 
-interface CarouselSpacingProps {}
+interface CarouselSpacingProps { }
 
 const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
   const t = useTranslations("popular");
   const locale = useLocale(); // Get the current locale
   return (
-    <div className="pt-24 pb-24  bg-stone-100 w-full">
-      <h2 className="text-center text-3xl uppercase">
+    <div className="pt-24 pb-24  bg-foreground w-full">
+      <h2 className="text-center text-3xl uppercase text-secondary">
         {t("siam popular dishes")}
       </h2>
       <div className="flex justify-center mt-2 mb-2">
@@ -34,10 +34,10 @@ const CarouselSpacing: React.FC<CarouselSpacingProps> = () => {
           <RxDividerHorizontal />
         </span>
       </div>
-      <p className="w-[70%] mb-8 mx-auto text-center">{t("discover")}</p>
+      <p className="w-[70%] mb-8 mx-auto text-center text-muted">{t("discover")}</p>
 
-      <Carousel className="max-w-[80%] m-auto">
-        <CarouselContent className="m-auto">
+      <Carousel className="max-w-[80%] m-auto" style={{ direction: 'ltr' }}>
+        <CarouselContent className="m-auto space-x-1">
           {/* {Array.from({ length: 5 }).map((_, index) => ( */}
           <SliderCard
             imgsrc="/pad thai.jpg"
