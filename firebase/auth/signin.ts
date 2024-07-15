@@ -1,5 +1,5 @@
 import firebase_app from "../config";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const auth = getAuth(firebase_app);
 
@@ -13,4 +13,13 @@ export default async function signIn(email: string, password: string) {
     }
 
     return { result, error };
+}
+export async function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+
+    try {
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        console.error("Error signing in with Google", error);
+    }
 }

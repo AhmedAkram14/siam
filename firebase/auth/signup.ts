@@ -22,15 +22,7 @@ export function _onAuthStateChanged(cb: NextOrObserver<User>) {
     return onAuthStateChanged(auth, cb);
 }
 
-export async function signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
 
-    try {
-        await signInWithPopup(auth, provider);
-    } catch (error) {
-        console.error("Error signing in with Google", error);
-    }
-}
 
 export async function signOut() {
     try {

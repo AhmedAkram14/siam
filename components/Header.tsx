@@ -1,15 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from '../navigation';
 import LocaleSwitcher from "./Locale-Switcher";
+import { AuthContext } from "@/context/AuthContext";
 
 const Header = ({ locale }: { locale: string }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const t = useTranslations("nav");
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,13 +103,14 @@ const Header = ({ locale }: { locale: string }) => {
           </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
+          {user ? <h2>{user.displayName}</h2> : <Link
             href="/login"
             locale={locale as "ar" | "en" | undefined}
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
             {t("login")} <span aria-hidden="true">→</span>
-          </Link>
+          </Link>}
+
         </div>
         <LocaleSwitcher locale={locale} optionalStyle="hidden lg:flex ms-12" />
       </nav>
