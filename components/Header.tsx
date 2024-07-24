@@ -1,12 +1,18 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+
+import { AuthContext } from '@/context/AuthContext';
+
 import { Link } from '../navigation';
-import LocaleSwitcher from "./Locale-Switcher";
-import { AuthContext } from "@/context/AuthContext";
-import User from "./User";
+import LocaleSwitcher from './Locale-Switcher';
+import User from './User';
 
 const Header = ({ locale }: { locale: string }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,15 +37,20 @@ const Header = ({ locale }: { locale: string }) => {
 
   return (
     <header
-      className={`fixed top-0 w-full z-40 transition-colors duration-300 ${scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
-        }`}
+      className={`fixed top-0 w-full z-40 transition-colors duration-300 ${
+        scrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+      }`}
     >
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" locale={locale as "ar" | "en" | undefined} className="-m-1.5 p-1.5">
+          <Link
+            href="/"
+            locale={locale as "ar" | "en" | undefined}
+            className="-m-1.5 p-1.5"
+          >
             <span className="sr-only">Your Company</span>
             <Image
               // className="h-8 w-auto"
@@ -89,7 +100,7 @@ const Header = ({ locale }: { locale: string }) => {
             {t("menu")}
           </Link>
           <Link
-            href="#"
+            href="/about"
             locale={locale as "ar" | "en" | undefined}
             className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
           >
@@ -104,14 +115,17 @@ const Header = ({ locale }: { locale: string }) => {
           </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {user ? <User user={user} /> : <Link
-            href="/login"
-            locale={locale as "ar" | "en" | undefined}
-            className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
-          >
-            {t("login")} <span aria-hidden="true">→</span>
-          </Link>}
-
+          {user ? (
+            <User user={user} />
+          ) : (
+            <Link
+              href="/login"
+              locale={locale as "ar" | "en" | undefined}
+              className="text-white text-opacity-70 hover:text-opacity-100 transition-all duration-300 font-semibold font-zilla leading-6 "
+            >
+              {t("login")} <span aria-hidden="true">→</span>
+            </Link>
+          )}
         </div>
         <LocaleSwitcher locale={locale} optionalStyle="hidden lg:flex ms-12" />
       </nav>
@@ -125,7 +139,11 @@ const Header = ({ locale }: { locale: string }) => {
         <div className="fixed inset-0 z-30" />
         <div className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link href="/" locale={locale as "ar" | "en" | undefined} className="-m-1.5 p-1.5">
+            <Link
+              href="/"
+              locale={locale as "ar" | "en" | undefined}
+              className="-m-1.5 p-1.5"
+            >
               <span className="sr-only">Your Company</span>
               <Image
                 // className="h-8 w-auto"
@@ -188,7 +206,10 @@ const Header = ({ locale }: { locale: string }) => {
                 >
                   {t("reservation")}
                 </Link>
-                <LocaleSwitcher locale={locale} optionalStyle="flex lg:hidden text-black mt-4" />
+                <LocaleSwitcher
+                  locale={locale}
+                  optionalStyle="flex lg:hidden text-black mt-4"
+                />
               </div>
               <div className="py-6">
                 <Link
